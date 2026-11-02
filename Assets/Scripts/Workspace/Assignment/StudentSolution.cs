@@ -99,14 +99,47 @@ namespace Assignment
 
         #region Assignment
 
+        
         public string ASN01_ReverseString(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+
+            foreach (char c in str)
+            {
+                stack.Push(c);
+            }
+
+            char[] result = new char[str.Length];
+            int i = 0;
+
+            while (stack.Count > 0)
+            {
+                result[i] = stack.Pop();
+                i++;
+            }
+
+            return new string(result);
         }
+
 
         public bool ASN02_StackPalindrome(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+
+            foreach (char c in str)
+            {
+                stack.Push(c);
+            }
+
+            foreach (char c in str)
+            {
+                if (c != stack.Pop())
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         #endregion
@@ -115,7 +148,41 @@ namespace Assignment
 
         public bool EX01_ParenthesesChecker(string str)
         {
-            throw new NotImplementedException();
+            Stack<char> stack = new Stack<char>();
+
+            foreach (char c in str)
+            {
+                if (c == '(' || c == '[' || c == '{')
+                {
+                    stack.Push(c);
+                }
+                else if (c == ')' || c == ']' || c == '}')
+                {
+                    if (stack.Count == 0)
+                    {
+                        return false;
+                    }
+
+                    char open = stack.Pop();
+
+                    if (c == ')' && open != '(')
+                    {
+                        return false;
+                    }
+
+                    if (c == ']' && open != '[')
+                    {
+                        return false;
+                    }
+
+                    if (c == '}' && open != '{')
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return stack.Count == 0;
         }
 
         #endregion
